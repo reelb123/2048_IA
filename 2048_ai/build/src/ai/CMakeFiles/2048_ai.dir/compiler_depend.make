@@ -396,6 +396,7 @@ src/ai/CMakeFiles/2048_ai.dir/main.cpp.o: /home/rayane/IA_Jeux/2048_ai/src/ai/ma
   /home/rayane/IA_Jeux/2048_ai/src/ai/Expectimax.hpp \
   /home/rayane/IA_Jeux/2048_ai/src/game/engine/src/headers/gameboard.hpp \
   /home/rayane/IA_Jeux/2048_ai/src/game/engine/src/headers/global.hpp \
+  /home/rayane/IA_Jeux/2048_ai/src/game/engine/src/headers/point2d.hpp \
   /home/rayane/IA_Jeux/2048_ai/src/game/engine/src/headers/tile.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \

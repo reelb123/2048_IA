@@ -1,3 +1,4 @@
+
 #include "Heuristics.hpp"
 #include "point2d.hpp"
 #include <cmath>
@@ -70,7 +71,7 @@ double Heuristics::maxTileCorner(const Game::GameBoard& gb) {
 
 double Heuristics::evaluate(const Game::GameBoard& gb) {
     return emptyCells(gb)
-         + snakeWeight(gb)
+         + 3.0 * snakeWeight(gb)   // poids 3× pour imposer le pattern en coin
          + smoothness(gb)
          + maxTileCorner(gb);
 }

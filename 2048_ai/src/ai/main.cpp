@@ -8,7 +8,6 @@
 // Profondeur par défaut selon la taille : plus le plateau est petit,
 // plus on peut se permettre une profondeur élevée.
 static int defaultDepth(int size) {
-    if (size <= 3) return 5;
     if (size <= 4) return 3;
     return 2;
 }
@@ -64,13 +63,10 @@ int main(int argc, char* argv[]) {
     if (argc >= 2) { try { size  = std::stoi(argv[1]); } catch (...) {} }
     if (argc >= 3) { try { depth = std::stoi(argv[2]); } catch (...) {} }
 
-    if (size < 3 || size > 8) {
-        std::cout << "Choisissez la taille du plateau (3 à 8, recommandé : 4) : ";
+    while (size < 4 || size > 8) {
+        if (size != 0) std::cout << "Taille invalide.\n";
+        std::cout << "Choisissez la taille du plateau (4 à 8) : ";
         std::cin >> size;
-        if (size < 3 || size > 8) {
-            std::cerr << "Taille invalide, 4 utilisé par défaut.\n";
-            size = 4;
-        }
     }
     if (depth <= 0) depth = defaultDepth(size);
 

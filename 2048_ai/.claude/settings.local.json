@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(timeout 120 ./build/src/ai/2048_ai 3 3)"
+      "Bash(timeout 120 ./build/src/ai/2048_ai 3 3)",
+      "Bash(timeout 60 ./build/src/ai/2048_ai 3 3)",
+      "Bash(cmake --build build)",
+      "Bash(timeout 90 ./build/src/ai/2048_ai 3)",
+      "Bash(timeout 120 ./build/src/ai/2048_ai 4)"
     ]
   }
 }
