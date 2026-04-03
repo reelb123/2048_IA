@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(timeout 120 ./build/src/ai/2048_ai 3 3)"
+    ]
+  }
+}
