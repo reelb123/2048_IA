@@ -54,9 +54,14 @@ static const char* moveName(Move m) {
 int main(int argc, char* argv[]) {
     int size  = 0;
     int depth = -1;
+    bool quiet = false; // n'affiche que la 1ère et la dernière grille
 
-    if (argc >= 2) { try { size  = std::stoi(argv[1]); } catch (...) {} }
-    if (argc >= 3) { try { depth = std::stoi(argv[2]); } catch (...) {} }
+    for (int i = 1; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "--quiet" || arg == "-q") { quiet = true; continue; }
+        if (size  == 0) { try { size  = std::stoi(arg); } catch (...) {} continue; }
+        if (depth == -1) { try { depth = std::stoi(arg); } catch (...) {} }
+    }
 
     while (size < 4 || size > 8) {
         if (size != 0) std::cout << "Taille invalide.\n";
@@ -75,14 +80,24 @@ int main(int argc, char* argv[]) {
     Expectimax ai(depth);
     int moves = 0;
 
-    while (canMoveOnGameboard(gb) && !gb.win) {
-        std::cout << "Coup " << ++moves
-                  << "  |  Score : " << gb.score
-                  << "  |  Max : " << gb.largestTile << "\n";
+    if (!quiet) {
+        std::cout << "Coup 0 (initial)\n";
         displayBoard(gb);
+        std::cout << "\n";
+    }
+
+    while (canMoveOnGameboard(gb) && !gb.win) {
+        ++moves;
 
         Move m = ai.bestMove(gb);
-        std::cout << "  → " << moveName(m) << "\n\n";
+
+        if (!quiet) {
+            std::cout << "Coup " << moves
+                      << "  |  Score : " << gb.score
+                      << "  |  Max : " << gb.largestTile << "\n";
+            displayBoard(gb);
+            std::cout << "  → " << moveName(m) << "\n\n";
+        }
 
         Game::GameBoard next = applyMove(gb, m);
         gb = next;
