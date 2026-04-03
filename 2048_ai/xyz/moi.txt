@@ -1,0 +1,8 @@
+do undo la dernière étape pour ne pas garder les copie dans le cavhe te ne pas etre trop long
+
+
+Les fichiers clés pour ton IA :
+
+gameboard.cpp — c'est le cœur, contient la logique des mouvements (14KB)
+game.cpp — la boucle de jeu principale (19KB)
+src/headers/ — les headers à regarder impérativement

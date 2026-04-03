@@ -1,0 +1,17 @@
+### Installation
+
+1. Open your terminal in your preferred directory and clone this project:
+git clone https://github.com/plibither8/2048.cpp
+
+2. Enter the project directory:
+cd 2048.cpp
+
+3. Build the executable and run tests
+ctest -S setup.cmake
+
+4. Install the program 
+sudo cmake --install build
+
+5. Run the program and play the game! :tada:
+2048    # run `build/2048 if game is not installed
+

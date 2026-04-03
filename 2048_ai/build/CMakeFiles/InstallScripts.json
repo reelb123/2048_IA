@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/rayane/IA_Jeux/2048_ai/build/cmake_install.cmake",
+		"/home/rayane/IA_Jeux/2048_ai/build/src/game/engine/cmake_install.cmake",
+		"/home/rayane/IA_Jeux/2048_ai/build/src/ai/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

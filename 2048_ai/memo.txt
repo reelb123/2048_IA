@@ -1,0 +1,30 @@
+~/IA_Jeux/2048_ai/
+├── src/
+│   ├── game/engine/     ← repo plibither8 (renommé)
+│   └── ai/              ← ton IA
+│       ├── AI.hpp
+│       ├── Heuristics.hpp/.cpp
+│       ├── Expectimax.hpp/.cpp
+│       └── main.cpp
+├── CMakeLists.txt
+└── build/
+
+
+Accéder au projet :
+bash: cd ~/IA_Jeux/2048_ai
+
+Compiler :
+bash: cmake -B build && cmake --build build
+
+Lancer l'IA :
+bash: ./build/src/ai/2048_ai
+bash: ./build/src/ai/2048_ai > resultat.txt && tail -5 resultat.txt
+
+Lancer le jeu humain :
+bash./build/src/game/engine/2048
+
+Modifier l'IA :
+Heuristiques → src/ai/Heuristics.cpp
+Algorithme → src/ai/Expectimax.cpp
+Profondeur → src/ai/main.cpp ligne Expectimax ai(X) où X = 1, 2 ou 3
+Après chaque modif → cmake --build build puis relance

@@ -1,0 +1,23 @@
+L'IA atteint 2048 sur un plateau 5x5. Voici un résumé des changements :
+
+Ce qui a été modifié
+Heuristics.cpp — 4 fonctions mises à jour :
+
+static int SIZE = 4 supprimé
+Chaque fonction lit maintenant la taille dynamiquement via getPlaySizeOfGameboardDataArray(gb.gbda)
+maxTileCorner : les coins ne sont plus hardcodés à {0,3},{3,0},{3,3} — ils utilisent size-1
+Expectimax.cpp — fonction expectation :
+
+Boucle for (int x = 0; x < 4; x++) → utilise size
+Indexation y * 4 + x → y * size + x
+main.cpp — nouvelle interface CLI :
+
+./2048_ai [taille] [profondeur] — deux arguments optionnels
+Si non fournis, prompt interactif pour la taille (3–8)
+Profondeur auto-adaptée : 3 pour 4×4, 2 pour 5×5+
+Usage
+
+./build/src/ai/2048_ai          # demande la taille
+./build/src/ai/2048_ai 4        # 4x4, profondeur 3 (par défaut)
+./build/src/ai/2048_ai 5        # 5x5, profondeur 2
+./build/src/ai/2048_ai 4 4      # 4x4, profondeur 4 (plus lent mais meilleur)
