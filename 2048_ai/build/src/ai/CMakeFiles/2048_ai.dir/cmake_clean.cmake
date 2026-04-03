@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/2048_ai.dir/link.d"
   "2048_ai"
   "2048_ai.pdb"
   "CMakeFiles/2048_ai.dir/Expectimax.cpp.o"

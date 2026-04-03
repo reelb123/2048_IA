@@ -5,18 +5,13 @@
 #include "gameboard.hpp"
 #include "Expectimax.hpp"
 
-// Profondeur par défaut selon la taille : plus le plateau est petit,
-// plus on peut se permettre une profondeur élevée.
 static int defaultDepth(int size) {
-    if (size <= 4) return 3;
-    return 2;
+    return size <= 4 ? 3 : 2;
 }
 
-// Affichage visuel en carreaux avec caractères de dessin de boîte Unicode.
-// Chaque cellule fait 6 caractères de large.
 static void displayBoard(const Game::GameBoard& gb) {
     int size = (int)getPlaySizeOfGameboardDataArray(gb.gbda);
-    const int W = 6; // largeur d'une cellule
+    const int W = 6; // max tile ~65536 → 5 chiffres + 1 espace de padding
 
     auto hline = [&](const std::string& l, const std::string& m,
                      const std::string& r, const std::string& h) {
@@ -89,13 +84,8 @@ int main(int argc, char* argv[]) {
         Move m = ai.bestMove(gb);
         std::cout << "  → " << moveName(m) << "\n\n";
 
-        unblockTilesOnGameboard(gb);
-        switch (m) {
-            case Move::UP:    tumbleTilesUpOnGameboard(gb);    break;
-            case Move::DOWN:  tumbleTilesDownOnGameboard(gb);  break;
-            case Move::LEFT:  tumbleTilesLeftOnGameboard(gb);  break;
-            case Move::RIGHT: tumbleTilesRightOnGameboard(gb); break;
-        }
+        Game::GameBoard next = applyMove(gb, m);
+        gb = next;
         registerMoveByOneOnGameboard(gb);
         addTileOnGameboard(gb);
     }
@@ -104,9 +94,9 @@ int main(int argc, char* argv[]) {
     std::cout << "       PARTIE TERMINÉE\n";
     std::cout << "══════════════════════════════\n";
     displayBoard(gb);
-    std::cout << "  Score final  : " << gb.score     << "\n";
+    std::cout << "  Score final  : " << gb.score      << "\n";
     std::cout << "  Tuile max    : " << gb.largestTile << "\n";
-    std::cout << "  Coups joués  : " << moves         << "\n";
+    std::cout << "  Coups joués  : " << moves          << "\n";
     if (gb.win) std::cout << "\n  ★ VICTOIRE ! ★\n";
     std::cout << "══════════════════════════════\n";
     return 0;

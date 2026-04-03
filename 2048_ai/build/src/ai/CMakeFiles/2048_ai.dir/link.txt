@@ -1,1 +1,1 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/2048_ai.dir/main.cpp.o CMakeFiles/2048_ai.dir/Heuristics.cpp.o CMakeFiles/2048_ai.dir/Expectimax.cpp.o -o 2048_ai  ../game/engine/lib2048_engine.a 
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/2048_ai.dir/link.d CMakeFiles/2048_ai.dir/main.cpp.o CMakeFiles/2048_ai.dir/Heuristics.cpp.o CMakeFiles/2048_ai.dir/Expectimax.cpp.o -o 2048_ai  ../game/engine/lib2048_engine.a

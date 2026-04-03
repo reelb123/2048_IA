@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/2048.dir/link.d"
   "2048"
   "2048.pdb"
   "CMakeFiles/2048.dir/src/2048.cpp.o"

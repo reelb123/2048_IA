@@ -1,1 +1,1 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/2048.dir/src/2048.cpp.o -o 2048  lib2048_engine.a 
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/2048.dir/link.d CMakeFiles/2048.dir/src/2048.cpp.o -o 2048  lib2048_engine.a

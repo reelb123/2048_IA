@@ -6,17 +6,6 @@
 #include <algorithm>
 #include <random>
 
-static Game::GameBoard applyMove(Game::GameBoard gb, Move m) {
-    unblockTilesOnGameboard(gb);
-    switch (m) {
-        case Move::UP:    tumbleTilesUpOnGameboard(gb);    break;
-        case Move::DOWN:  tumbleTilesDownOnGameboard(gb);  break;
-        case Move::LEFT:  tumbleTilesLeftOnGameboard(gb);  break;
-        case Move::RIGHT: tumbleTilesRightOnGameboard(gb); break;
-    }
-    return gb;
-}
-
 double Expectimax::maximize(Game::GameBoard gb, int depth) {
     if (depth == 0 || !canMoveOnGameboard(gb))
         return Heuristics::evaluate(gb);
@@ -41,8 +30,9 @@ double Expectimax::expectation(Game::GameBoard gb, int depth) {
 
     if (emptyCells.empty()) return Heuristics::evaluate(gb);
 
-    std::shuffle(emptyCells.begin(), emptyCells.end(),
-                 std::mt19937{std::random_device{}()});
+    // RNG statique : initialisé une seule fois, pas à chaque appel.
+    static std::mt19937 rng{std::random_device{}()};
+    std::shuffle(emptyCells.begin(), emptyCells.end(), rng);
 
     int limit = std::min((int)emptyCells.size(), 4);
     double score = 0;
@@ -52,11 +42,11 @@ double Expectimax::expectation(Game::GameBoard gb, int depth) {
 
         Game::GameBoard gb2 = gb;
         std::get<1>(gb2.gbda)[y * size + x].value = 2;
-        score += 0.9 * maximize(gb2, depth);
+        score += 0.9 * maximize(gb2, depth); // 90% de chances que la tuile soit un 2
 
         Game::GameBoard gb4 = gb;
         std::get<1>(gb4.gbda)[y * size + x].value = 4;
-        score += 0.1 * maximize(gb4, depth);
+        score += 0.1 * maximize(gb4, depth); // 10% de chances que ce soit un 4
     }
     return score / limit;
 }
